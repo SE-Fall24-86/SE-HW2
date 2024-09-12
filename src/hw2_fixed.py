@@ -1,41 +1,45 @@
+"""Module providing a function to perform Merge Sort"""
+
 import rand
 
 
-def mergeSort(arr):
-    if (len(arr) == 1):
-        return arr
+def merge_sort(arr_merge):
+    """Function to perform the merging"""
+    if len(arr_merge) == 1:
+        return arr_merge
 
-    half = len(arr)//2
+    half = len(arr_merge) // 2
 
-    return recombine(mergeSort(arr[:half]), mergeSort(arr[half:]))
+    return recombine(merge_sort(arr_merge[:half]), merge_sort(arr_merge[half:]))
 
 
-def recombine(leftArr, rightArr):
-    leftIndex = 0
-    rightIndex = 0
-    mergeArr = [None] * (len(leftArr) + len(rightArr))
+def recombine(left_arr, right_arr):
+    """Correct implementation of recombine function"""
+    left_index = 0
+    right_index = 0
+    merge_arr = [None] * (len(left_arr) + len(right_arr))
 
-    while leftIndex < len(leftArr) and rightIndex < len(rightArr):
-        if leftArr[leftIndex] < rightArr[rightIndex]:
-            mergeArr[leftIndex + rightIndex] = leftArr[leftIndex]
-            leftIndex += 1
+    while left_index < len(left_arr) and right_index < len(right_arr):
+        if left_arr[left_index] < right_arr[right_index]:
+            merge_arr[left_index + right_index] = left_arr[left_index]
+            left_index += 1
         else:
-            mergeArr[leftIndex + rightIndex] = rightArr[rightIndex]
-            rightIndex += 1
+            merge_arr[left_index + right_index] = right_arr[right_index]
+            right_index += 1
 
-    while leftIndex < len(leftArr):
-        mergeArr[leftIndex + rightIndex] = leftArr[leftIndex]
-        leftIndex += 1
+    while left_index < len(left_arr):
+        merge_arr[left_index + right_index] = left_arr[left_index]
+        left_index += 1
 
-    while rightIndex < len(rightArr):
-        mergeArr[leftIndex + rightIndex] = rightArr[rightIndex]
-        rightIndex += 1
+    while right_index < len(right_arr):
+        merge_arr[left_index + right_index] = right_arr[right_index]
+        right_index += 1
 
-    return mergeArr
+    return merge_arr
 
 
 arr = rand.random_array([None] * 20)
 # arr = [5, 3, 2, 1, 8, 10, 11, 9, 23]
-arr_out = mergeSort(arr)
+arr_out = merge_sort(arr)
 
 print(arr_out)
