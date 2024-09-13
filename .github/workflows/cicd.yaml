@@ -2,6 +2,9 @@ name: Python CICD
 
 on: [push]
 
+permissions:
+      contents: write
+
 jobs:
   build:
 
@@ -30,8 +33,6 @@ jobs:
       run: pyflakes src/* > post_traces/pyflakes_traces.txt
 
     - name: Push post_traces folder
-      permissions:
-      contents: write
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "GitHub Actions"
