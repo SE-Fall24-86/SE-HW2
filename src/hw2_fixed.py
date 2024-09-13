@@ -1,11 +1,11 @@
 """Module providing a function to perform Merge Sort"""
 
-import rand
+from src.rand import random_array
 
 
 def merge_sort(arr_merge):
     """Function to perform the merging"""
-    if len(arr_merge) == 1:
+    if len(arr_merge) <= 1:
         return arr_merge
 
     half = len(arr_merge) // 2
@@ -38,7 +38,7 @@ def recombine(left_arr, right_arr):
     return merge_arr
 
 
-arr = rand.random_array([None] * 20)
+arr = random_array([None] * 20)
 # arr = [5, 3, 2, 1, 8, 10, 11, 9, 23]
 arr_out = merge_sort(arr)
 
