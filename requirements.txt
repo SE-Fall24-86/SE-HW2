@@ -1,6 +1,5 @@
 astroid==3.2.4
 autopep8==2.3.1
-bandit==1.7.9
 cfgv==3.4.0
 coverage==7.6.1
 dill==0.3.8

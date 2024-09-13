@@ -23,8 +23,11 @@ jobs:
     - name: Run pylint
       run: pylint src/* > post_traces/pylint_traces.txt
 
-    - name: Run autopep9
+    - name: Run autopep8
       run: autopep8 --recursive --in-place --aggressive --aggressive src/* > post_traces/pep8_traces.txt
+
+    - name: Run Pyflakes
+      run: pyflakes src/* > post_traces/pyflakes_traces.txt
 
     - name: Test with pytest
       run: |
