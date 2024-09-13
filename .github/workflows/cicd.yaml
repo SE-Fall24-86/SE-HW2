@@ -1,0 +1,45 @@
+name: Python CICD
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13.0-rc.1'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Create post traces directory
+      run: mkdir -p post_traces
+
+    - name: Run pylint
+      run: py -m pylint src/* > post_traces/pylint_traces.txt
+
+    - name: Run Bandit
+      run: bandit -r src/* > post_traces/bandit_traces.txt
+
+    - name: Run autopep9
+      run: autopep8 --recursive --in-place --aggressive --aggressive src/* > pep8_traces.txt
+      
+    - name: Test with pytest
+      run: |
+        pip install pytest pytest-cov
+        pytest test_simple.py --doctest-modules --junitxml=junit/test-results.xml --cov=./main --cov-report=xml --cov-report=html
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage.xml
+    - name: Upload coverage report to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: coverage.xml
+        token: ${{ secrets.CODECOV_TOKEN }}

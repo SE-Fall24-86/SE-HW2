@@ -1,13 +1,14 @@
 repos:
-  - repo: https://github.com/PyCQA/bandit
+    - repo: https://github.com/PyCQA/bandit
     rev: "main"
     hooks:
-      - id: bandit
-  - repo: https://github.com/PyCQA/pylint
+        - id: bandit
+    - repo: https://github.com/PyCQA/pylint
     rev: "main" # Use the sha / tag you want to point at
     hooks:
-      - id: pylint
-  - repo: https://github.com/pre-commit/mirrors-autopep8
+        - id: pylint
+    - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: "main" # Use the sha / tag you want to point at
     hooks:
-      - id: autopep8
+        - id: autopep8
+
